@@ -1,75 +1,53 @@
-import time
-import miscmath
-
-start_time = time.clock()
-
-coin_values = [1, 2, 5, 10, 20, 50, 100, 200]
-print(coin_values)
-
-
-def count(combo):
-    return sum(miscmath.elementwise_multiply(combo, coin_values))
+breaks = {200: {200: -1, 100: 2},
+          100: {100: -1, 50: 2},
+          50: {50: -1, 20: 2, 10: 1},
+          20: {20: -1, 10: 2},
+          10: {10: -1, 5: 2},
+          5: {5: -1, 2: 2, 1: 1},
+          2: {2: -1, 1: 2}}
 
 
-# count = utils.Memoize(count)
-
-def find_efficient_combo(target_value):
-    combo = [0] * len(coin_values)
-    for i in range(len(coin_values))[::-1]:
-        while count(combo) <= target_value:
-            combo[i] += 1
-        combo[i] -= 1
-    return combo
+def dict_add(dict_1, dict_2):
+    # print('d1', dict_1)
+    # print('d2', dict_2)
+    return {k: dict_1[k] + dict_2.get(k, 0) for k in dict_1}
 
 
-def find_efficient_combo_no_singles(target_value):
-    combo = [0] * len(coin_values)
-    for i in range(len(coin_values))[::-1]:
-        if target_value < coin_values[i]:
-            continue
-        elif target_value == coin_values[i]:
-            combo[i] = -1
-            continue
-        while count(combo) <= target_value:
-            combo[i] += 1
-        combo[i] -= 1
-    return combo
+def solve(start):
+    count = 1
+
+    print(start)
+
+    def break_coins(coins):
+        nonlocal count
+        print(count)
+
+        breakable_coins = (k for k, v in coins.items() if v > 0 and k != 1)
+
+        for coin in breakable_coins:
+            count += 1
+
+            # print(breaks[coin])
+            # print(coins[50])
+            # print(breaks[coin][50])
+            new_coins = dict_add(coins, breaks[coin])
+            # print(new_coins)
+
+            break_coins(new_coins)
+
+    break_coins(start)
+
+    print(count)
 
 
-divisions = [find_efficient_combo_no_singles(n) for n in coin_values]
-print(divisions)
+if __name__ == '__main__':
+    start = {200: 0,
+             100: 0,
+             50: 0,
+             20: 2,
+             10: 0,
+             5: 0,
+             2: 0,
+             1: 0}
 
-combination_count = 0
-
-combo = find_efficient_combo(200)
-final_combo = [200, 0, 0, 0, 0, 0, 0, 0]
-
-iterator = range(len(combo))[::-1]
-
-
-# while combo != final_combo:
-#     for i in iterator:
-#         while combo[i] > 0:
-#             combo[i] -= 1
-#             combo = miscmath.elementwise_sum(combo, divisions[i])
-#             combination_count += 1
-#             print(combo, combination_count)
-
-def recursion(combo):
-    combination_count = 0
-    for i in iterator:
-        subtracted = 0
-        while combo[i] - subtracted > 0:
-            print(combo)
-            subtracted += 1
-            combination_count += 1
-            recursion(miscmath.elementwise_sum(combo, miscmath.elementwise_multiply([subtracted] * 8, divisions[i])))
-
-
-recursion(combo)
-
-print(combination_count)
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+    solve(start)
