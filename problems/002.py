@@ -1,6 +1,3 @@
-import time
-
-
 def fib(n):
     if n == 0:
         return 1
@@ -20,12 +17,6 @@ def fib_list(limit):
     return fibs
 
 
-start_time = time.clock()
-
-nums = [i for i in fib_list(4000000) if i % 2 == 0]
-# for i in range(10): print(nums[i])
-print(sum(nums))
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+def solve():
+    nums = [i for i in fib_list(4000000) if i % 2 == 0]
+    return sum(nums)

@@ -16,9 +16,9 @@ def solve_and_print(func):
 def timed(func):
     @functools.wraps(func)
     def timed_func():
-        t_start = time.time()
+        t_start = time.clock()
         func()
-        print(f'Elaped Wall Time: {round(time.time() - t_start, 6)} seconds')
+        print(f'Elaped Wall Time: {round(time.clock() - t_start, 6)} seconds')
 
     return timed_func
 

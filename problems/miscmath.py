@@ -43,8 +43,8 @@ def proper_factorization(n):
 
 
 def quadratic_formula(a, b, c):
-    temp = math.sqrt(b ** 2 - 4 * a * c)
-    return (-b + temp) / (2 * a), (-b - temp) / (2 * a)
+    sqrt_disc = math.sqrt(b ** 2 - 4 * a * c)
+    return (-b + sqrt_disc) / (2 * a), (-b - sqrt_disc) / (2 * a)
 
 
 def key_of_max_value(dictionary):
@@ -62,10 +62,9 @@ def is_square(n):
     return False
 
 
-def is_palindrome(n):
-    if str(n)[::-1] == str(n):
-        return True
-    return False
+def is_palindrome(x):
+    s = str(x)
+    return s == s[::-1]
 
 
 def decimal_to_binary(n):
