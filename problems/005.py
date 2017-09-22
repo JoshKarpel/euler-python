@@ -1,39 +1,29 @@
-import time
+from collections import defaultdict, Counter
+
+from . import primes
 
 
-def list_product(num_list):
-    product = 1
-    for i in num_list:
-        product *= i
-    return product
+def merge_counts_by_cmp(*counters, cmp = max):
+    keys = set(sum((list(counter.keys()) for counter in counters), list()))
+    merged = Counter()
+    for counter in counters:
+        for key in keys:
+            merged[key] = cmp(merged[key], counter[key])
+    return merged
 
 
-def find_answer():
-    i = 20
-    found = False
-    while True:
-        i += 1
-        # if i > upperBound: break
-        # if i%10000000 == 0: print(i/upperBound)
-        for d in divisors:
-            # print(i,d)
-            if i % d != 0:
-                found = False
-                break
-            found = True
-        if found:
-            return i
+def multiply_counter(counter):
+    acc = 1
+    for factor, count in counter.items():
+        acc *= factor ** count
+
+    return acc
 
 
-start_time = time.clock()
+def solve():
+    factorizations = [primes.prime_factorization(n) for n in range(2, 21)]
+    factor_counts = [Counter(factorization) for factorization in factorizations]
 
-# upperBound = product([i for i in range(1,21)])
-# print(upperBound)
+    max_counts = merge_counts_by_cmp(*factor_counts, cmp = max)
 
-divisors = range(2, 21)
-
-print(find_answer())
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+    return multiply_counter(max_counts)
