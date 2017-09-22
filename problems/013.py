@@ -1,14 +1,5 @@
-import time
+def solve():
+    with open('problems/013_numbers.txt', mode = 'r') as f:
+        numbers = [int(x) for x in f]
 
-
-start_time = time.clock()
-
-numbers = [int(number) for number in list(open('013_numbers.txt', 'r'))]
-
-print(numbers)
-
-print(str(sum(numbers))[:10])
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+    return str(sum(numbers))[:10]
