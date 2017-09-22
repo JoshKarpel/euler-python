@@ -1,10 +1,5 @@
-import time
-import primes
+from . import primes
 
-start_time = time.clock()
 
-print(primes.find_n_primes(10001))
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time-start_time))
+def solve():
+    return primes.find_n_primes(10001)[-1]

@@ -1,22 +1,11 @@
-import time
-import miscmath
+from . import miscmath
 
-start_time = time.clock()
 
-test = 500
-triangle = 1
+def solve():
+    test = 500
 
-while True:
-    test += 1
-    # triangle += test
-    triangle = int(test * (test + 1) / 2)
-    # print(test,triangle,factors(triangle))
-    if len(miscmath.full_factorization(triangle)) > 500:
-        break
-
-# print(test,triangle,factors(triangle))
-print(test, triangle)
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+    while True:
+        test += 1
+        triangle = int(test * (test + 1) / 2)
+        if len(miscmath.full_factorization(triangle)) > 500:
+            return triangle
