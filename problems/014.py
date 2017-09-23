@@ -1,4 +1,4 @@
-from . import mymath, utils
+from problems import mymath, utils
 
 
 @utils.memoize
@@ -16,3 +16,7 @@ def solve():
     collatz_lengths = {x: collatz_length(x) for x in range(1, 1000001)}
 
     return mymath.key_of_max_value(collatz_lengths)
+
+
+if __name__ == '__main__':
+    print(solve())

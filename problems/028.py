@@ -9,3 +9,7 @@ def solve():
         diagonals += [last_number + (n * (spiral_depth - 1)) for n in range(1, 5)]
 
     return sum(diagonals)
+
+
+if __name__ == '__main__':
+    print(solve())

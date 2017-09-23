@@ -1,25 +1,24 @@
-import time
-import primes
+from problems import primes
 
 
-start_time = time.clock()
+def solve():
+    longest = [0, 0, 0]
 
-longest = [0, 0, 0]
+    primes_list = primes.find_primes_less_than_n(1000)
 
-for b in range(-999, 1000, 2):
-	for c in primes.find_primes_less_than_n(1000):
-		n = -1
-		while True:
-			n += 1
-			q = n ** 2 + (b * n) + c
-			if not primes.is_prime(q) or q <= 1:
-				if n > longest[2]:
-					longest = [b, c, n, q]
-				break
+    for b in range(-999, 1000, 2):
+        for c in primes_list:
+            n = -1
+            while True:
+                n += 1
+                q = n ** 2 + (b * n) + c
+                if not primes.is_prime(q) or q <= 1:
+                    if n > longest[2]:
+                        longest = [b, c, n, q]
+                    break
 
-print(longest)
-print(longest[0] * longest[1])
+    return longest[0] * longest[1]
 
-end_time = time.clock()
 
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

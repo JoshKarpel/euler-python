@@ -36,7 +36,7 @@ def full_factorization(n):
 def proper_factorization(n):
     factors = set()
     for divisor in range(1, int(math.ceil(math.sqrt(n)) + 1)):
-        if n % divisor == 0 and divisor not in factors:
+        if n % divisor == 0:
             factors.add(divisor)
             factors.add(round((n / divisor)))
     return sorted(factors)[:-1]
@@ -73,3 +73,15 @@ def decimal_to_binary(n):
 
 def n_choose_r(n, r):
     return math.factorial(n) / (math.factorial(r) * math.factorial(n - r))
+
+
+def triangle_number(n):
+    return int(n * (n + 1) / 2)
+
+
+def pentagon_number(n):
+    return int(n * ((3 * n) - 1) / 2)
+
+
+def hexagon_number(n):
+    return int(n * ((2 * n) - 1))

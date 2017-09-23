@@ -1,2 +1,3 @@
-# euler
-My Project Euler code
+# euler-python
+
+My Project Euler code, in Python.

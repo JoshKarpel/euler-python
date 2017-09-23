@@ -1,4 +1,4 @@
-from . import primes
+from problems import primes
 
 
 def period(d):
@@ -16,3 +16,7 @@ def solve():
         periods_to_d[period(d)] = d
 
     return periods_to_d[max(periods_to_d)]
+
+
+if __name__ == '__main__':
+    print(solve())

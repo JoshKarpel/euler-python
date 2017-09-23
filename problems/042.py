@@ -1,18 +1,15 @@
-import time
+import os
 
 
-start_time = time.clock()
+def solve():
+    filepath = os.path.join(os.path.dirname(__file__), '042_words.txt')
+    with open(filepath) as f:
+        word_value_list = (sum([(ord(i) - 96) for i in word]) for word in f.read().replace('"', '').lower().split(','))
 
-triangle_numbers = [n * (n + 1) / 2 for n in range(1,1000)]
+    triangle_numbers = [n * (n + 1) / 2 for n in range(1, 1000)]
 
-file = open('042_words.txt', 'r')
+    return sum(wv in triangle_numbers for wv in word_value_list)
 
-word_value_list = [sum([(ord(i) - 96) for i in word]) for word in file.read().replace('"', '').lower().split(',')]
 
-print(word_value_list)
-
-print(len([i for i in word_value_list if i in triangle_numbers]))
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

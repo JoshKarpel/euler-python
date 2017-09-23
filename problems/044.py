@@ -1,13 +1,14 @@
 import time
 from problems import utils
 import math
-import miscmath
 
-@utils.Memoize
+
+@utils.memoize
 def pentagon(n):
     return int(n * ((3 * n) - 1) / 2)
 
-@utils.Memoize
+
+@utils.memoize
 def is_pentagon(x):
     n = (math.sqrt((24 * x) + 1) + 1) / 6
     if round(n) == n:
@@ -15,10 +16,10 @@ def is_pentagon(x):
     else:
         return False
 
-start_time = time.clock()
+
+def solve():
+    raise NotImplementedError
 
 
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

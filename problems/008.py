@@ -1,10 +1,11 @@
 import os
 
-from . import mymath
+from problems import mymath
 
-filepath = os.path.join(os.path.dirname(__file__), '022_names.txt')
+
 
 def solve():
+    filepath = os.path.join(os.path.dirname(__file__), '008_number.txt')
     with open(filepath) as f:
         number = f.read().replace('\n', '')
 
@@ -13,3 +14,7 @@ def solve():
     largest_product = max(mymath.list_product(numbers[start: start + 13]) for start in range(len(numbers) - 13))
 
     return largest_product
+
+
+if __name__ == '__main__':
+    print(solve())

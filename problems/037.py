@@ -1,30 +1,34 @@
-import time
-import primes
+from problems import primes
 
-start_time = time.clock()
 
-upper_bound = 1000000
+def is_truncatable(p, prime_list):
+    p_str = str(p)
 
-prime_list = primes.find_primes_less_than_n(upper_bound)
-truncatabale_primes = []
+    for trunc in range(len(p_str) - 1):
+        if int(p_str[:trunc + 1]) not in prime_list or int(p_str[trunc + 1:]) not in prime_list:
+            return False
 
-for prime in prime_list:
-    if len(truncatabale_primes) == 11:
-        break
-    truncatabale = True
-    prime_str = str(prime)
-    for trunc in range(len(str(prime)) - 1):
-        if int(prime_str[:trunc + 1]) not in prime_list or int(prime_str[trunc + 1:]) not in prime_list:
-            truncatabale = False
+    return True
+
+
+def solve():
+    truncatabale_primes = []
+    prime_list = []
+
+    for p in primes.generate_primes():
+        prime_list.append(p)
+
+        if p < 10:
+            continue
+
+        if len(truncatabale_primes) == 11:
             break
-    if truncatabale and len(prime_str) != 1:
-        truncatabale_primes.append(prime)
-        print(prime)
 
-print(len(truncatabale_primes))
-print(truncatabale_primes)
-print(sum(truncatabale_primes))
+        if is_truncatable(p, prime_list):
+            truncatabale_primes.append(p)
 
-end_time = time.clock()
+    return sum(truncatabale_primes)
 
-print('Elapsed Time: ' + str(end_time - start_time))
+
+if __name__ == '__main__':
+    print(solve())

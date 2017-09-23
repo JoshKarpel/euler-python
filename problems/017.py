@@ -7,8 +7,8 @@ HUNDREDS = {1: 'onehundred', 2: 'twohundred', 3: 'threehundred', 4: 'fourhundred
 def solve():
     words = []
 
-    for number_as_str in (str(i) for i in range(1, 1001)):
-        print(number_as_str, len(number_as_str))
+    # for number_as_str in (str(i) for i in range(1, 1001)):
+    # print(number_as_str, len(number_as_str))
         # if len_i == 1:
         #     print(ONES[i])
         #     words += ONES[i]
@@ -35,3 +35,7 @@ def solve():
         #     words += 'onethousand'
 
     return len(''.join(words))
+
+
+if __name__ == '__main__':
+    print(solve())

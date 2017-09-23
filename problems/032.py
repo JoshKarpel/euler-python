@@ -1,24 +1,22 @@
-import time
-import miscmath
+import itertools
 
-start_time = time.clock()
+from problems import mymath
 
-digits_sorted = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-permutations = miscmath.permutations(digits_sorted)
+def solve():
+    digits_sorted = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-correct_products = set()
+    permutations = itertools.permutations(digits_sorted)
 
-for digit_string in permutations:
-    for i in range(1, 5):
-        # print(int(''.join(digit_string[0:i])), int(''.join(digit_string[i:5])), int(''.join(digit_string[5:])))
-        if int(''.join(digit_string[0:i])) * int(''.join(digit_string[i:5])) == int(''.join(digit_string[5:])):
-            correct_products.add(int(''.join(digit_string[5:])))
-            print(int(''.join(digit_string[0:i])), int(''.join(digit_string[i:5])), int(''.join(digit_string[5:])))
+    correct_products = set()
 
-print(correct_products)
-print(sum(correct_products))
+    for digit_string in permutations:
+        for i in range(1, 5):
+            if int(''.join(digit_string[0:i])) * int(''.join(digit_string[i:5])) == int(''.join(digit_string[5:])):
+                correct_products.add(int(''.join(digit_string[5:])))
 
-end_time = time.clock()
+    return sum(correct_products)
 
-print('Elapsed Time: ' + str(end_time - start_time))
+
+if __name__ == '__main__':
+    print(solve())

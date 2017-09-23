@@ -1,24 +1,34 @@
-import time
+from math import sqrt
+
+from problems import mymath
 
 
-start_time = time.clock()
+def t_from_p(p):
+    """Quadratic formula!"""
+    return (-1 + sqrt(1 - (4 * (-3 * (p ** 2) + p)))) / 2
 
-n = 0
-found = 0
-triangular = set()
-pentagonal = set()
-hexagonal = set()
 
-while found < 3:
-	n += 1
-	triangular.add(int(n * (n + 1) / 2))
-	pentagonal.add(int(n * ((3 * n) - 1) / 2))
-	hexagonal.add(int(n * ((2 * n) - 1)))
-	intersect = triangular.intersection(pentagonal).intersection(hexagonal)
-	if len(intersect) > found:
-		found += 1
-		print(sorted(intersect))
+def h_from_p(p):
+    """Quadratice formula!"""
+    return (2 + sqrt(4 - 16 * (-3 * (p ** 2) + p))) / 8
 
-end_time = time.clock()
 
-print('Elapsed Time: ' + str(end_time - start_time))
+def solve():
+    p = 165
+    while True:
+
+        p += 1
+
+        t = t_from_p(p)
+        if t != int(t):
+            continue
+
+        h = h_from_p(p)
+        if h != int(h):
+            continue
+
+        return mymath.pentagon_number(p)
+
+
+if __name__ == '__main__':
+    print(solve())

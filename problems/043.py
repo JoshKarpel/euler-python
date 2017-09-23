@@ -1,33 +1,29 @@
-import time
-import miscmath
-import primes
+import itertools
+from problems import mymath, primes
 
 divisors = primes.find_n_primes(10)
 
+
 def divisibility_test(n):
-	divisor_strings = [int(str(n)[i:i + 3]) for i in range(1, 8)]
-	check = [int(divisor_strings[i] / divisors[i]) == divisor_strings[i] / divisors[i] for i in range(0, 7)]
-	return miscmath.list_product(check)
+    n_str = str(n)
+    numerators = [int(n_str[i:i + 3]) for i in range(1, 8)]
+    return all(num % div == 0 for num, div in zip(numerators, divisors))
 
-#print(divisibility_test(1406357289))
 
-start_time = time.clock()
+def solve():
+    permutations = (int(''.join(i)) for i in itertools.permutations('0123456789'))
 
-permutations = [int(i) for i in miscmath.permutations('0123456789')]
+    numbers = []
 
-numbers = []
+    for test in permutations:
+        if test < 1000000:  # must have started with a zero
+            continue
 
-for test in permutations:
-	try:
-		if divisibility_test(test):
-			numbers.append(test)
-	except IndexError:
-		pass
+        if divisibility_test(test):
+            numbers.append(test)
 
-print(numbers)
-print(len(numbers))
-print(sum(numbers))
+    return sum(numbers)
 
-end_time = time.clock()
 
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

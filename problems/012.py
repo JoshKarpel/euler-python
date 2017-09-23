@@ -1,4 +1,4 @@
-from . import mymath
+from problems import mymath
 
 
 def solve():
@@ -9,3 +9,7 @@ def solve():
         triangle = int(test * (test + 1) / 2)
         if len(mymath.full_factorization(triangle)) > 500:
             return triangle
+
+
+if __name__ == '__main__':
+    print(solve())

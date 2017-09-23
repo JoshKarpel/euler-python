@@ -1,24 +1,16 @@
-import time
 import math
+
+digit_factorials = {str(x): math.factorial(x) for x in range(10)}
 
 
 def digit_factorial_sum(n):
-    return sum([math.factorial(int(i)) for i in str(n)])
+    return sum(digit_factorials[i] for i in str(n))
 
 
-start_time = time.clock()
+def solve():
+    upper_bound = 9999999
+    return sum(x for x in range(3, upper_bound) if x == digit_factorial_sum(x))
 
-upper_bound = 9999999
 
-curious = set()
-
-for test in range(3, upper_bound):
-    if test == digit_factorial_sum(test):
-        curious.add(test)
-
-print(curious)
-print(sum(curious))
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

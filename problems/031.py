@@ -13,10 +13,18 @@ def dict_add(dict_1, dict_2):
     return {k: dict_1[k] + dict_2.get(k, 0) for k in dict_1}
 
 
-def solve(start):
+def solve():
+    raise NotImplementedError
     count = 1
 
-    print(start)
+    start = {200: 0,
+             100: 0,
+             50: 0,
+             20: 2,
+             10: 0,
+             5: 0,
+             2: 0,
+             1: 0}
 
     def break_coins(coins):
         nonlocal count
@@ -40,14 +48,6 @@ def solve(start):
     print(count)
 
 
-if __name__ == '__main__':
-    start = {200: 0,
-             100: 0,
-             50: 0,
-             20: 2,
-             10: 0,
-             5: 0,
-             2: 0,
-             1: 0}
 
-    solve(start)
+if __name__ == '__main__':
+    print(solve())

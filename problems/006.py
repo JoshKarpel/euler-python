@@ -9,3 +9,7 @@ def square_of_sums(n):
 def solve():
     n = 100
     return abs(sum_of_squares(n) - square_of_sums(n))
+
+
+if __name__ == '__main__':
+    print(solve())

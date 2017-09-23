@@ -1,6 +1,6 @@
 from collections import defaultdict, Counter
 
-from . import primes
+from problems import primes
 
 
 def merge_counts_by_cmp(*counters, cmp = max):
@@ -27,3 +27,7 @@ def solve():
     max_counts = merge_counts_by_cmp(*factor_counts, cmp = max)
 
     return multiply_counter(max_counts)
+
+
+if __name__ == '__main__':
+    print(solve())

@@ -14,3 +14,7 @@ def solve():
     for p in products:
         if is_palindrome(p):
             return p
+
+
+if __name__ == '__main__':
+    print(solve())

@@ -1,5 +1,4 @@
-import time
-import primes
+from problems import primes
 
 
 def generate_rotations(n):
@@ -19,30 +18,24 @@ def strip_primes(n):
         return True
 
 
-start_time = time.clock()
+def solve():
+    upper_bound = 1000000
 
-upper_bound = 1000000
+    primes_list = primes.find_primes_less_than_n(upper_bound)
+    stripped_primes_list = [2] + [prime for prime in primes_list if strip_primes(prime)]
 
-primes_list = primes.find_primes_less_than_n(upper_bound)
-print(len(primes_list))
-stripped_primes_list = [2] + [prime for prime in primes_list if strip_primes(prime)]
-print(len(stripped_primes_list))
+    circular_primes = []
 
-# print(primes_list)
+    for prime in stripped_primes_list:
+        if prime not in circular_primes:
+            for rotated_prime in generate_rotations(prime):
+                if rotated_prime not in stripped_primes_list:
+                    break  # if prime is not circular, break for loop
+            else:  # if loop does not break, the prime is circular
+                circular_primes += generate_rotations(prime)
 
-circular_primes = []
+    return len(circular_primes)
 
-for prime in stripped_primes_list:
-    if prime not in circular_primes:
-        for rotated_prime in generate_rotations(prime):
-            if rotated_prime not in stripped_primes_list:
-                break  # if prime is not circular, break for loop
-        else:  # if loop does not break, the prime is circular
-            circular_primes += generate_rotations(prime)
 
-end_time = time.clock()
-
-print(len(circular_primes))
-print(circular_primes)
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

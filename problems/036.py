@@ -1,17 +1,15 @@
-import time
-import miscmath
+from problems import mymath
 
-start_time = time.clock()
 
-palindromes = []
+def solve():
+    palindromes = []
 
-for test in range(1, 1000001):
-	if miscmath.is_palindrome(test) and miscmath.is_palindrome(miscmath.decimal_to_binary(test)):
-		palindromes.append(test)
+    for test in range(1, 1000001):
+        if mymath.is_palindrome(test) and mymath.is_palindrome(mymath.decimal_to_binary(test)):
+            palindromes.append(test)
 
-print(palindromes)
-print(sum(palindromes))
+    return sum(palindromes)
 
-end_time = time.clock()
 
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

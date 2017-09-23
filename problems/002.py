@@ -10,3 +10,7 @@ def fibs_to_limit(limit):
 
 def solve():
     return sum(i for i in fibs_to_limit(4000000) if i % 2 == 0)
+
+
+if __name__ == '__main__':
+    print(solve())

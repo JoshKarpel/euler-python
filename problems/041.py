@@ -1,24 +1,21 @@
-import time
-import primes
-import miscmath
+import itertools
+from problems import primes
 
 
-start_time = time.clock()
+def solve():
+    digits_sorted = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-digits_sorted = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    upper_bound = str(1234567)
 
-upper_bound = str(1234567)
+    pandigitals = []
 
-pandigitals = []
+    for test in reversed(sorted(itertools.permutations(upper_bound))):
+        num = int(''.join(test))
+        if primes.is_prime(num) and sorted(test) == digits_sorted[:len(test)]:
+            pandigitals.append(num)
 
-for test in reversed(sorted(miscmath.permutations(upper_bound))):
-	if primes.is_prime(int(test)) and sorted(test) == digits_sorted[:len(test)]:
-		pandigitals.append(int(test))
+    return max(pandigitals)
 
-#print(pandigitals)
 
-print(max(pandigitals))
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

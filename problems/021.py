@@ -23,3 +23,7 @@ def solve():
                 amicable_numbers.add(b)
 
     return sum(amicable_numbers)
+
+
+if __name__ == '__main__':
+    print(solve())

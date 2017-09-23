@@ -1,22 +1,20 @@
-import time
-import primes
-import miscmath
+from collections import deque
 
-start_time = time.clock()
-
-test = 0
-prime_factorization_lengths = [0, 0, 0, 0, 0, 0]
-target_length = 4
-
-while True:
-    test += 1
-    print(test)
-    prime_factorization_lengths.append(len(set(primes.prime_factorization(test))))
-    if miscmath.list_product([prime_factorization_lengths[-1 - i] == target_length for i in range(0, target_length)]):
-        print('FOUND IT', sorted([test - i for i in range(0, target_length)]))
-        break
+from problems import primes
 
 
-end_time = time.clock()
+def solve():
+    target_length = 4
 
-print('Elapsed Time: ' + str(end_time - start_time))
+    test = 0
+    distinct_factor_lens = deque(maxlen = target_length)
+
+    while True:
+        test += 1
+        distinct_factor_lens.append(len(set(primes.prime_factorization(test))))
+        if all(x == target_length for x in distinct_factor_lens):
+            return test - target_length + 1
+
+
+if __name__ == '__main__':
+    print(solve())

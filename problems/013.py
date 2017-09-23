@@ -1,9 +1,13 @@
 import os
 
-filepath = os.path.join(os.path.dirname(__file__), '022_names.txt')
 
 def solve():
+    filepath = os.path.join(os.path.dirname(__file__), '013_numbers.txt')
     with open(filepath) as f:
         numbers = [int(x) for x in f]
 
-    return str(sum(numbers))[:10]
+    return int(str(sum(numbers))[:10])
+
+
+if __name__ == '__main__':
+    print(solve())

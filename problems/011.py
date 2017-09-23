@@ -1,11 +1,15 @@
 import itertools
+import os
 
-from . import mymath
+from problems import mymath
+
+
 
 
 def get_grid():
     grid = []
-    with open('problems/011_grid.txt', mode = 'r') as f:
+    filepath = os.path.join(os.path.dirname(__file__), '011_grid.txt')
+    with open(filepath, mode = 'r') as f:
         for row_str in f:
             row = [int(x) for x in row_str.split(' ')]
             grid.append(row)
@@ -33,3 +37,7 @@ def get_product(grid, row, column, row_shift, column_shift):
 def solve():
     grid = get_grid()
     return max(get_product(grid, r, c, r_shift, c_shift) for r, c, r_shift, c_shift in itertools.product(range(20), range(20), SHIFTS.keys(), SHIFTS.keys()))
+
+
+if __name__ == '__main__':
+    print(solve())
