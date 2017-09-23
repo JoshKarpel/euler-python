@@ -1,20 +1,18 @@
-import time
-import primes
+from . import primes
 
 
-def period(n):
+def period(d):
+    """Returns the length of the longest recurring cycle in the fraction 1/d."""
     test = 0
     while True:
-        # print(test)
         test += 1
-        if (10 ** test) % n == 1:
+        if (10 ** test) % d == 1:
             return test
 
-start_time = time.clock()
 
-for n in primes.find_primes_less_than_n(1000)[4:]:
-    print(n, 1 / n, period(n))
+def solve():
+    periods_to_d = {}
+    for d in primes.find_primes_less_than_n(1000)[4:]:
+        periods_to_d[period(d)] = d
 
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+    return periods_to_d[max(periods_to_d)]

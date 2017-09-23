@@ -1,12 +1,10 @@
-import time
+import os
+
+filepath = os.path.join(os.path.dirname(__file__), '022_names.txt')
 
 
-start_time = time.clock()
+def solve():
+    with open(filepath, mode = 'r') as f:
+        names = f.read().lower().replace('"', '').split(',')
 
-file = open('022_names.txt', 'r')
-
-print(sum([(count + 1) * sum([(ord(i) - 96) for i in name]) for (count, name) in enumerate(sorted(file.read().replace('"', '').lower().split(',')))]))
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+    return sum((pos + 1) * sum(ord(char) - 96 for char in name) for pos, name in enumerate(sorted(names)))

@@ -1,16 +1,5 @@
-import time
+import itertools
 
 
-start_time = time.clock()
-
-sequence = set()
-
-for a in range(2, 101):
-	for b in range(2, 101):
-		sequence.add(a ** b)
-
-print(len(sequence))
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+def solve():
+    return len({a ** b for a, b, in itertools.product(range(2, 101), repeat = 2)})

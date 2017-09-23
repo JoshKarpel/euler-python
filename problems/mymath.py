@@ -26,7 +26,7 @@ def square_of_sums(n):
 
 def full_factorization(n):
     factors = set()
-    for d in range(1, math.ceil(math.sqrt(n)) + 1):
+    for d in range(1, int(math.ceil(math.sqrt(n)) + 1)):
         if n % d == 0 and d not in factors:
             factors.add(d)
             factors.add(int(n / d))
@@ -35,7 +35,7 @@ def full_factorization(n):
 
 def proper_factorization(n):
     factors = set()
-    for divisor in range(1, math.ceil(math.sqrt(n)) + 1):
+    for divisor in range(1, int(math.ceil(math.sqrt(n)) + 1)):
         if n % divisor == 0 and divisor not in factors:
             factors.add(divisor)
             factors.add(round((n / divisor)))
@@ -71,18 +71,5 @@ def decimal_to_binary(n):
     return int(bin(n)[2:])
 
 
-def number_of_combinations(n, r):
+def n_choose_r(n, r):
     return math.factorial(n) / (math.factorial(r) * math.factorial(n - r))
-
-
-def permutations(sequence):
-    """
-    Generates all of the permutations of the elements of a sequence.
-    """
-    if not sequence:
-        yield sequence
-    else:
-        for i in range(len(sequence)):
-            rest = sequence[:i] + sequence[i + 1:]
-            for x in permutations(rest):
-                yield sequence[i:i + 1] + x

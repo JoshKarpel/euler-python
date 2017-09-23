@@ -1,4 +1,4 @@
-from . import miscmath, utils
+from . import mymath, utils
 
 
 @utils.memoize
@@ -15,4 +15,4 @@ def collatz_length(n):
 def solve():
     collatz_lengths = {x: collatz_length(x) for x in range(1, 1000001)}
 
-    return miscmath.key_of_max_value(collatz_lengths)
+    return mymath.key_of_max_value(collatz_lengths)

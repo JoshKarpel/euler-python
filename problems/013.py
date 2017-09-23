@@ -1,5 +1,9 @@
+import os
+
+filepath = os.path.join(os.path.dirname(__file__), '022_names.txt')
+
 def solve():
-    with open('problems/013_numbers.txt', mode = 'r') as f:
+    with open(filepath) as f:
         numbers = [int(x) for x in f]
 
     return str(sum(numbers))[:10]

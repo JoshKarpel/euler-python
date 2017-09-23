@@ -1,4 +1,4 @@
-from . import miscmath
+from . import mymath
 
 
 def solve():
@@ -7,5 +7,5 @@ def solve():
     while True:
         test += 1
         triangle = int(test * (test + 1) / 2)
-        if len(miscmath.full_factorization(triangle)) > 500:
+        if len(mymath.full_factorization(triangle)) > 500:
             return triangle

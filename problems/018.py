@@ -1,5 +1,10 @@
+import os
+
+filepath = os.path.join(os.path.dirname(__file__), '022_names.txt')
+
+
 def solve():
-    with open('problems/018_triangle.txt') as file:
+    with open(filepath) as file:
         triangle = [[int(x) for x in line.strip('\n').split(' ')] for line in file]
 
     current_sum_row = triangle[-1]
