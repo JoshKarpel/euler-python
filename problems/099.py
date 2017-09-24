@@ -1,18 +1,16 @@
-import time
-import math
+import os
+from math import log
 
 
-start_time = time.clock()
+def solve():
+    filepath = os.path.join(os.path.dirname(__file__), '099_pairs.txt')
+    with open(filepath) as file:
+        pairs = [[int(x) for x in line.strip('\n').split(',')] for line in file]
 
-with open('099_pairs.txt') as file:
-    pairs = [[int(x) for x in line.strip('\n').split(',')] for line in file]
+    log_values = [pair[1] * log(pair[0]) for pair in pairs]
 
-print(pairs)
+    return max(log_values), log_values.index(max(log_values)) + 1
 
-log_values = [pair[1] * math.log(pair[0]) for pair in pairs]
 
-print(max(log_values), log_values.index(max(log_values)) + 1)
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

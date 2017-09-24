@@ -71,7 +71,7 @@ def decimal_to_binary(n):
     return int(bin(n)[2:])
 
 
-def n_choose_r(n, r):
+def number_of_combinations(n, r):
     return math.factorial(n) / (math.factorial(r) * math.factorial(n - r))
 
 

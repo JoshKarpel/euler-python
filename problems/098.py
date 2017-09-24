@@ -1,29 +1,25 @@
-import time
-import miscmath
+import os
+import itertools
 
-start_time = time.clock()
+from problems import mymath
 
-file = open('098_words.txt', 'r')
 
-words = [word for word in file.read().replace('"', '').lower().split(',')]
+def solve():
+    filepath = os.path.join(os.path.dirname(__file__), '067_triangle.txt')
+    with open(filepath) as file:
+        words = [word for word in file.read().replace('"', '').lower().split(',')]
 
-# words = ['ability']
+    square_anagrams = dict()
 
-square_anagrams = dict()
+    for word in words:
+        square_anagrams[word] = []
+        for anagram in itertools.permutations(word):
+            anagram_number = int(''.join([str(ord(letter) - 96) for letter in anagram]))
+            if mymath.is_square(anagram_number) and not mymath.is_palindrome(anagram):
+                square_anagrams[word] += (anagram, anagram_number)
 
-for word in words:
-    print(word)
-    square_anagrams[word] = []
-    for anagram in miscmath.permutations(word):
-        anagram_number = int(''.join([str(ord(letter) - 96) for letter in anagram]))
-        # print(anagram, anagram_number)
-        if miscmath.is_square(anagram_number) and not miscmath.is_palindrome(anagram):
-            square_anagrams[word] += (anagram, anagram_number)
-            print(True)
-            print(square_anagrams)
+    return square_anagrams
 
-print(square_anagrams)
 
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

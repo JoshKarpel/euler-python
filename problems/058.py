@@ -1,9 +1,7 @@
-import time
-import primes
+from problems import primes
 
-start_time = time.clock()
 
-def check():
+def solve():
     diagonals = [1]
     spiral_depth = 3
 
@@ -20,11 +18,8 @@ def check():
                 prime_count += 1
             if prime_count / diag_count < .10:
                 return spiral_depth
-            print(diag, prime_count, diag_count, prime_count / diag_count, spiral_depth)
         spiral_depth += 2
 
-print(check())
 
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())

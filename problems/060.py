@@ -21,3 +21,7 @@ def solve():
                         found *= False
             if found:
                 return sum(current_primes)
+
+
+if __name__ == '__main__':
+    print(solve())

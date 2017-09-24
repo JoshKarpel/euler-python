@@ -21,3 +21,7 @@ def solve():
                 break
 
     return len(lychrel)
+
+
+if __name__ == '__main__':
+    print(solve())

@@ -1,11 +1,11 @@
-import time
-
+import os
 
 def sign(x):
     if x < 0:
         return -1
     if x > 0:
         return 1
+    return 0
 
 
 class Point:
@@ -54,18 +54,18 @@ class Triangle:
         else:
             return True
 
-with open('102_triangles.txt') as file:
-    raw_triangles = [[int(x) for x in line.strip('\n').split(',')] for line in file]
+
+def solve():
+    filepath = os.path.join(os.path.dirname(__file__), '102_triangles.txt')
+    with open(filepath) as file:
+        raw_triangles = [[int(x) for x in line.strip('\n').split(',')] for line in file]
+
     triangles = []
     for raw_triangle in raw_triangles:
         triangles.append(Triangle([Point(raw_triangle[0], raw_triangle[1]), Point(raw_triangle[2], raw_triangle[3]), Point(raw_triangle[4], raw_triangle[5])]))
 
-# print(triangles)
+    return len([triangle for triangle in triangles if triangle.legal()])
 
-start_time = time.clock()
 
-print(len([triangle for triangle in triangles if triangle.legal()]))
-
-end_time = time.clock()
-
-print('Elapsed Time: ' + str(end_time - start_time))
+if __name__ == '__main__':
+    print(solve())
