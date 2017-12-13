@@ -1,52 +1,45 @@
-breaks = {200: {200: -1, 100: 2},
-          100: {100: -1, 50: 2},
-          50: {50: -1, 20: 2, 10: 1},
-          20: {20: -1, 10: 2},
-          10: {10: -1, 5: 2},
-          5: {5: -1, 2: 2, 1: 1},
-          2: {2: -1, 1: 2}}
+from collections import defaultdict
+
+from problems import mymath
 
 
-def dict_add(dict_1, dict_2):
-    # print('d1', dict_1)
-    # print('d2', dict_2)
-    return {k: dict_1[k] + dict_2.get(k, 0) for k in dict_1}
+class GeometricSeries(defaultdict):
+    def __init__(self, *args, **kwargs):
+        super().__init__(int, *args, **kwargs)
+
+    def __mul__(self, other, truncate = None):
+        result = GeometricSeries()
+
+        for power_self, coefficient_self in self.items():
+            for power_other, coefficient_other in other.items():
+                if truncate and power_self + power_other > truncate:
+                    continue
+
+                result[power_self + power_other] += coefficient_self * coefficient_other
+
+        return result
+
+    def __str__(self):
+        return ' + '.join(f'{coefficient if coefficient != 1 else ""}x^{power}' for power, coefficient in sorted(self.items()))
+
+    @classmethod
+    def one(cls):
+        """Return the GeometricSeries representation of the identity."""
+        return cls({0: 1})
+
+
+COINS = [1, 2, 5, 10, 20, 50, 100, 200]
 
 
 def solve():
-    raise NotImplementedError
-    count = 1
+    series_list = [
+        GeometricSeries({power: 1 for power in range(0, 201, k)})
+        for k in COINS
+    ]
 
-    start = {200: 0,
-             100: 0,
-             50: 0,
-             20: 2,
-             10: 0,
-             5: 0,
-             2: 0,
-             1: 0}
+    result = mymath.iterable_product(series_list, initial = GeometricSeries.one())
 
-    def break_coins(coins):
-        nonlocal count
-        print(count)
-
-        breakable_coins = (k for k, v in coins.items() if v > 0 and k != 1)
-
-        for coin in breakable_coins:
-            count += 1
-
-            # print(breaks[coin])
-            # print(coins[50])
-            # print(breaks[coin][50])
-            new_coins = dict_add(coins, breaks[coin])
-            # print(new_coins)
-
-            break_coins(new_coins)
-
-    break_coins(start)
-
-    print(count)
-
+    return result[200]
 
 
 if __name__ == '__main__':

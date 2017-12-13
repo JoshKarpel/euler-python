@@ -29,7 +29,7 @@ def get_product(grid, row, column, row_shift, column_shift):
         return 0
 
     try:
-        return mymath.list_product(grid[row + row_shift][column + col_shift] for row_shift, col_shift in zip(SHIFTS[row_shift], SHIFTS[column_shift]))
+        return mymath.iterable_product(grid[row + row_shift][column + col_shift] for row_shift, col_shift in zip(SHIFTS[row_shift], SHIFTS[column_shift]))
     except IndexError:
         return 0
 

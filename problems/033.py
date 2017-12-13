@@ -28,7 +28,7 @@ def solve():
                 if denominator_str_cancelled != str(0) and int(numerator_str_cancelled) / int(denominator_str_cancelled) == fraction[0] / fraction[1]:
                     answers.append(fraction[0] / fraction[1])
 
-    return int(ceil(1 / mymath.list_product(answers)))
+    return int(ceil(1 / mymath.iterable_product(answers)))
 
 
 if __name__ == '__main__':
