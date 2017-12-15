@@ -1,10 +1,10 @@
 import math
 
 
-def list_product(num_list):
-    product = 1
-    for i in num_list:
-        product *= i
+def iterable_product(iterable, initial = 1):
+    product = initial
+    for element in iterable:
+        product *= element
     return product
 
 
@@ -34,12 +34,7 @@ def full_factorization(n):
 
 
 def proper_factorization(n):
-    factors = set()
-    for divisor in range(1, int(math.ceil(math.sqrt(n)) + 1)):
-        if n % divisor == 0:
-            factors.add(divisor)
-            factors.add(round((n / divisor)))
-    return sorted(factors)[:-1]
+    return full_factorization(n)[:-1]
 
 
 def quadratic_formula(a, b, c):
@@ -57,9 +52,7 @@ def key_of_min_value(dictionary):
 
 def is_square(n):
     sqrt_n = math.sqrt(n)
-    if sqrt_n == math.floor(sqrt_n):
-        return True
-    return False
+    return sqrt_n == int(sqrt_n)
 
 
 def is_palindrome(x):

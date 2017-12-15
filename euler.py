@@ -3,10 +3,9 @@ import functools
 import time
 import importlib
 import os
-import sys
 import collections
 import re
-import timeit as timeit_
+import timeit as _timeit
 
 ANSWERS = collections.defaultdict(lambda: object())
 THIS_DIR = os.path.dirname(__file__)
@@ -65,7 +64,7 @@ ANSWER_WIDTH = 20
 @cli.command()
 @click.argument('problem')
 def solve(problem):
-    """Solve PROBLEM."""
+    """Solve a problem."""
     try:
         problem = problem.rjust(3, '0')
         mod = importlib.import_module(f'problems.{problem}')
@@ -77,7 +76,7 @@ def solve(problem):
     solver = solve_with_diagnostics(mod.solve)
     answer = solver()
 
-    click.secho(f'Answer: {answer.answer} {CORRECT_TO_STR[answer.correct]} │ Elapsed Time: {round(answer.elapsed_time, 6)} seconds',
+    click.secho(f'Answer: {answer.answer} {CORRECT_TO_STR[answer.correct]} │ Elapsed Time: {answer.elapsed_time:.6f} seconds',
                 fg = CORRECT_TO_COLOR[answer.correct])
 
     return answer
@@ -90,10 +89,10 @@ def get_maximally_solved_problem_number():
 
 
 @cli.command()
-@click.option('--start', '-s', default = 1)
-@click.option('--end', '-e', default = get_maximally_solved_problem_number())
-# @click.option('--file', '-f', type = click.Path(dir_okay = False), default = '-')
+@click.option('--start', '-s', default = 1, help = 'First problem to solve.')
+@click.option('--end', '-e', default = get_maximally_solved_problem_number(), help = 'Last problem to solve.')
 def check(start, end):
+    """Solve many problems."""
     start = max(start, 1)
 
     header = f'  P  │ {"Answer".center(ANSWER_WIDTH)} │ C │ Elapsed Time'
@@ -109,7 +108,7 @@ def check(start, end):
             solver = solve_with_diagnostics(mod.solve)
             answer = solver()
 
-            click.secho(f' {problem} │ {str(answer.answer).center(ANSWER_WIDTH)} │ {CORRECT_TO_STR[answer.correct]} │ {round(answer.elapsed_time, 6)} seconds',
+            click.secho(f' {problem} │ {str(answer.answer).center(ANSWER_WIDTH)} │ {CORRECT_TO_STR[answer.correct]} │ {answer.elapsed_time:.6f} seconds',
                         fg = CORRECT_TO_COLOR[answer.correct])
         except (ImportError, ModuleNotFoundError):
             click.secho(f' {problem} │ {"SOLVER NOT FOUND".center(ANSWER_WIDTH)} │ ? │',
@@ -122,12 +121,12 @@ def check(start, end):
 @cli.command()
 @click.argument('problem')
 def timeit(problem):
-    """Time the solver for PROBLEM."""
+    """Time the solver for a problem."""
     problem = problem.rjust(3, '0')
 
-    timer = timeit_.Timer('mod.solve()', setup = f'import importlib; mod = importlib.import_module(f"problems.{problem}")')
+    timer = _timeit.Timer('mod.solve()', setup = f'import importlib; mod = importlib.import_module(f"problems.{problem}")')
     loops, total_time = timer.autorange()
-    click.echo(f'Time per Solve: {round(total_time / loops, 6)} seconds')
+    click.echo(f'Time per Solve: {total_time / loops:.6f} seconds')
 
 
 if __name__ == '__main__':

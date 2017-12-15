@@ -13,11 +13,9 @@ def solve():
 
     test = lower_bound
     while test < upper_bound:
-        # print(test, test ** 2, (test - lower_bound) / (upper_bound - lower_bound))
         if target.match(str(test ** 2)) is not None:
             return test
         test += 40
-        # print(test, test ** 2, (test - lower_bound) / (upper_bound - lower_bound))
         if target.match(str(test ** 2)) is not None:
             return test
         test += 60

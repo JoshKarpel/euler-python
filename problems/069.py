@@ -30,7 +30,7 @@ def solve():
         prime_factorization_dictionary[n] = prime_factorization_specialized(n)
 
     def phi(n):
-        return round(n * mymath.list_product([1 - (1 / p) for p in set(prime_factorization_dictionary[n])]))
+        return round(n * mymath.iterable_product([1 - (1 / p) for p in set(prime_factorization_dictionary[n])]))
 
     ratios = {i: i / phi(i) for i in range(2, upper_bound)}
 
