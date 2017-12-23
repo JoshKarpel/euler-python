@@ -31,6 +31,7 @@ class GeometricSeries(defaultdict):
 COINS = [1, 2, 5, 10, 20, 50, 100, 200]
 
 
+# see https://en.wikipedia.org/wiki/Partition_(number_theory)
 def solve():
     series_list = [
         GeometricSeries({power: 1 for power in range(0, 201, k)})

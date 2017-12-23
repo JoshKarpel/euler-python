@@ -1,6 +1,7 @@
-import time
+from math import sqrt
+import collections
+
 from problems import utils
-import math
 
 
 @utils.memoize
@@ -8,17 +9,16 @@ def pentagon(n):
     return int(n * ((3 * n) - 1) / 2)
 
 
-@utils.memoize
-def is_pentagon(x):
-    n = (math.sqrt((24 * x) + 1) + 1) / 6
-    if round(n) == n:
-        return n
-    else:
-        return False
-
-
 def solve():
-    raise NotImplementedError
+    upper_bound = 3000
+    pentagons = set((pentagon(n) for n in range(1, upper_bound)))
+    for n in range(1, upper_bound):
+        p_n = pentagon(n)
+        for m in range(1, n):
+            p_m = pentagon(m)
+
+            if p_n - p_m in pentagons and p_n + p_m in pentagons:
+                return p_n - p_m
 
 
 if __name__ == '__main__':
