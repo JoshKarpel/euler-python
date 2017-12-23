@@ -8,7 +8,7 @@ def digit_factorial_sum(n):
 
 
 def solve():
-    upper_bound = 9999999
+    upper_bound = digit_factorials['9'] * 7
     return sum(x for x in range(3, upper_bound) if x == digit_factorial_sum(x))
 
 
