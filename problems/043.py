@@ -1,4 +1,5 @@
 import itertools
+
 from problems import mymath, primes
 
 divisors = primes.find_n_primes(10)

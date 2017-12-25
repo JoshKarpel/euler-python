@@ -9,7 +9,7 @@ def t_from_p(p):
 
 
 def h_from_p(p):
-    """Quadratice formula!"""
+    """Quadratic formula!"""
     return (2 + sqrt(4 - 16 * (-3 * (p ** 2) + p))) / 8
 
 

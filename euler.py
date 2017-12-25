@@ -42,7 +42,7 @@ def solve_with_diagnostics(func):
 
 
 CORRECT_TO_STR = {
-    True: '✓',
+    True: '✔',
     False: '✘',
     None: '?',
 }
@@ -74,7 +74,12 @@ def solve(problem):
         return 0
 
     solver = solve_with_diagnostics(mod.solve)
-    answer = solver()
+    try:
+        answer = solver()
+    except NotImplementedError:
+        click.secho('SOLVER NOT IMPLEMENTED',
+                    fg = 'yellow')
+        return 0
 
     click.secho(f'Answer: {answer.answer} {CORRECT_TO_STR[answer.correct]} │ Elapsed Time: {answer.elapsed_time:.6f} seconds',
                 fg = CORRECT_TO_COLOR[answer.correct])

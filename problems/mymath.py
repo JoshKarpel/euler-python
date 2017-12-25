@@ -1,4 +1,5 @@
 import math
+from collections import defaultdict
 
 
 def iterable_product(iterable, initial = 1):
@@ -78,3 +79,31 @@ def pentagon_number(n):
 
 def hexagon_number(n):
     return int(n * ((2 * n) - 1))
+
+
+class GeometricSeries(defaultdict):
+    def __init__(self, *args, **kwargs):
+        super().__init__(int, *args, **kwargs)
+
+    def __mul__(self, other, truncate = None):
+        result = GeometricSeries()
+
+        for power_self, coefficient_self in self.items():
+            for power_other, coefficient_other in other.items():
+                if truncate is not None and power_self + power_other > truncate:
+                    continue
+
+                result[power_self + power_other] += coefficient_self * coefficient_other
+
+        return result
+
+    def multiply(self, other, truncate = None):
+        return self.__mul__(other, truncate = truncate)
+
+    def __str__(self):
+        return ' + '.join(f'{coefficient if coefficient != 1 else ""}x^{power}' for power, coefficient in sorted(self.items()))
+
+    @classmethod
+    def one(cls):
+        """Return the GeometricSeries representation of the identity."""
+        return cls({0: 1})
