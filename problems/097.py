@@ -9,7 +9,6 @@ def solve():
         x = truncated_double(x)
 
     x += 1
-    print(x)
 
     last_ten = str(x)[-10:]
     return last_ten

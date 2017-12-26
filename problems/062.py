@@ -1,18 +1,25 @@
 import itertools
+import collections
+
+from problems import utils, mymath, primes
+
+
+def is_cube(n):
+    counter = collections.Counter(primes.prime_factorization(n))
+
+    return all(v % 3 == 0 for v in counter.values())
 
 
 def solve():
     upper_bound = 1000
 
-    permutations_set = dict()
-    permutations_included = []
-    cubes = {str(i ** 3) for i in range(1, upper_bound)}
+    for c in range(upper_bound):
+        cube = c ** 3
+        perms = set(int(''.join(n)) for n in itertools.permutations(str(cube)))
+        num_cube_perms = len([n for n in perms if is_cube(n)])
 
-    for test_index in range(1, upper_bound):
-        test_cube = test_index ** 3
-        intersect = set(itertools.permutations(str(test_cube))).intersection(cubes)
-        if len(intersect) == 5:
-            break
+        if num_cube_perms == 3:
+            return cube
 
 
 if __name__ == '__main__':
